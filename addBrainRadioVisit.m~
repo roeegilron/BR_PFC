@@ -43,8 +43,13 @@ for v = 1:length(fv) % loop on visits
             %% write all of this to one json file
             dataToWriteJson.visitdetail = visitdetail;
             dataToWriteJson.xmldetail = xmldetail;
+            
             jsonfn = sprintf('%s_session_details-^^^^-.json',fn);
             savejson('',dataToWriteJson,fullfile(pn, jsonfn));
+            %% add ims data 
+            dataToWriteJson.imsdata = []; % default empty 
+            % find corret imsdata 
+            
         end
     end
 end
