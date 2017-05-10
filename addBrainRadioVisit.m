@@ -23,6 +23,13 @@ if ~skipthis
     end
 end
 % XXX concatenate imstable in the future
+%% find empatica data 
+settings.rawempaticFold
+fe = findFilesBVQX(settings.rawempaticFold,'*.zip');
+unzip(fe,settings.rawempaticFold); 
+for z = 1:length(fe) 
+    unzip(fe); 
+end
 
 %% Find visit
 fv = findFilesBVQX(settings.rootdir,'20*',struct('dirs',1,'depth',1));
@@ -43,8 +50,13 @@ for v = 1:length(fv) % loop on visits
             %% write all of this to one json file
             dataToWriteJson.visitdetail = visitdetail;
             dataToWriteJson.xmldetail = xmldetail;
+            
             jsonfn = sprintf('%s_session_details-^^^^-.json',fn);
             savejson('',dataToWriteJson,fullfile(pn, jsonfn));
+            %% add ims data 
+            dataToWriteJson.imsdata = []; % default empty 
+            % find corret imsdata 
+            %% find watch data 
         end
     end
 end
